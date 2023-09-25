@@ -9,15 +9,19 @@
 </head>
 <body>
 <div class="container">
+    <div th:if="${didUpdate == true}" class="alert alert-primary" role="alert">
+        <span th:text="${editedCashier.idCashier} has been updated."></span>
+    </div>
     <div class="row">
         <div class="col-md-12">
             <h1> Cashiers working </h1>
             <table class="table table-bordered table-striped">
                 <thead class="">
-                    <th>id</th>
-                    <th>nombre</th>
-                    <th>sección</th>
-                    <th>piso</th>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Department</th>
+                    <th>Floor</th>
+                    <th>Status</th>
                 </thead>
                 <tbody>
                     <tr th:each="cashier : ${cashiers}">
@@ -25,13 +29,22 @@
                         <td th:text="${cashier.name}"></td>
                         <td th:text="${cashier.storeSection}"></td>
                         <td th:text="${cashier.floor}"></td>
-                        <!-- <td th:text="${cashier.active == 1 ? 'active' : 'innactive'}"></td> -->
+                        <td th:text="${cashier.active == true ? 'Active' : 'Not active'}"></td>
+                        <td>
+                            <a th:href="@{/cashiers/edit/{idCashier}(idCashier=${cashier.idCashier})}"  class="btn btn-info"> Edit </a>
+                            <form th:action="@{/cashiers/delete/{idCashier}(idCashier=${cashier.idCashier})}" method="post">
+                                <button th:if="${cashier.active == true}" class="btn btn-danger" type="submit"> Deactivate </button>
+                                <button th:if="${cashier.active == false}" class="btn btn-success" type="submit"> Activate </button>
+                            </form>
+
+                        </td>
                     </tr>
                 </tbody>
             </table>
         </div>
         <div>
             <a href="/cashiers/create" class="btn btn-success"> New cashier </a>
+            <a href="/" class="btn btn-warning"> Back home </a>
         </div>
     </div>
 </div>

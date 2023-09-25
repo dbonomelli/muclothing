@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://thymeleaf.org">
+<head>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <title>Edit Cashier </title>
+
+</head>
+<body>
+<div class="container">
+    <div class="row" style="margin-top: 15px;">
+        <div class="col-md-12">
+            <h1> Edit cashiers</h1>
+            <form th:action="@{/cashiers/edit/{idCashier}(idCashier=${cashier.idCashier})}" method="post">
+
+                <div class="input-group mb-3">
+                    <label class="input-group-text" for="cashier-name">Name</label>
+                    <input name="name" th:value="${cashier.name}" class="form-control" id="cashier-name" type="text" required>
+                </div>
+                <div class="input-group mb-3">
+                    <label class="input-group-text" for="storeSection">Section</label>
+                    <input name="storeSection" th:value="${cashier.storeSection}" class="form-control" id="storeSection" type="text" required>
+                </div>
+                <div class="input-group mb-3">
+                    <label class="input-group-text" for="floor">Floor number</label>
+                    <input name="floor" class="form-control" th:value="${cashier.floor}" id="floor" type="number" max="3" min="1" required>
+                </div>
+                <button type="submit" class="btn btn-success"> Edit cashier</button>
+            </form>
+        </div>
+        <div>
+
+        </div>
+    </div>
+</div>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

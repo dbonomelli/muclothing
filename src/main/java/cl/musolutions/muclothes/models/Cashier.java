@@ -21,5 +21,5 @@ public class Cashier {
     private String name;
     private String storeSection;
     private int floor;
-    //private boolean active;
+    private boolean active;
 }

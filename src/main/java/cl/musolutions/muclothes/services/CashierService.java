@@ -8,5 +8,6 @@ public interface CashierService {
     List<Cashier> get();
     Cashier add(Cashier cashier);
     Cashier edit(int id, Cashier cashier);
+    Cashier find(int id);
     Cashier remove(int id);
 }

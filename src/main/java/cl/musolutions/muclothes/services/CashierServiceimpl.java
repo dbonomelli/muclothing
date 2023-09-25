@@ -29,11 +29,34 @@ public class CashierServiceimpl implements CashierService{
 
     @Override
     public Cashier edit(int id, Cashier cashier) {
-        return null;
+        Cashier foundCashier = cashierRepository.findById(id).get();
+        foundCashier.setName(cashier.getName());
+        foundCashier.setStoreSection(cashier.getStoreSection());
+        foundCashier.setFloor(cashier.getFloor());
+
+        cashierRepository.save(foundCashier);
+
+        return foundCashier;
     }
 
     @Override
+    public Cashier find(int id) {
+        boolean foundCashier = cashierRepository.findById(id).isPresent();
+        if(!foundCashier){
+            return null;
+        }else{
+            return cashierRepository.findById(id).get();
+        }
+    }
+    @Override
     public Cashier remove(int id) {
+        boolean findCashier = cashierRepository.findById(id).isPresent();
+        if(findCashier){
+            Cashier toDeactivate = cashierRepository.findById(id).get();
+            toDeactivate.setActive(!toDeactivate.isActive());
+            cashierRepository.save(toDeactivate);
+            return toDeactivate;
+        }
         return null;
     }
 }
